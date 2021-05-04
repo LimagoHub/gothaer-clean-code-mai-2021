@@ -1,9 +1,9 @@
 package de.gothaer.games.takegame.players;
 
-public interface TakeGamePlayer {
+import de.gothaer.games.players.Player;
+
+public interface TakeGamePlayer extends Player<Integer, Integer>{
 	
-	String getName();
 	
-	int doTurn(int stones);
 
 }

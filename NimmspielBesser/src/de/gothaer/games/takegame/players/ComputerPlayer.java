@@ -1,6 +1,8 @@
 package de.gothaer.games.takegame.players;
 
-public class ComputerPlayer extends AbstractTakeGamePlayer {
+import de.gothaer.games.players.AbstractPlayer;
+
+public class ComputerPlayer extends AbstractPlayer<Integer, Integer> {
 
 	private final int zuege[] = {3,1,1,2}; 
 	
@@ -13,7 +15,7 @@ public class ComputerPlayer extends AbstractTakeGamePlayer {
 	}
 
 	@Override
-	public int doTurn(int stones) {
+	public Integer doTurn(Integer stones) {
 		int move = zuege[stones % 4];
 		System.out.printf("Computer nimmt %s Steine\n", move);
 		return move;

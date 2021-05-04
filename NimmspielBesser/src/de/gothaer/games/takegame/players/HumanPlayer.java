@@ -2,7 +2,9 @@ package de.gothaer.games.takegame.players;
 
 import java.util.Scanner;
 
-public class HumanPlayer extends AbstractTakeGamePlayer {
+import de.gothaer.games.players.AbstractPlayer;
+
+public class HumanPlayer extends AbstractPlayer<Integer, Integer> {
 	private final Scanner scanner = new Scanner(System.in);
 	public HumanPlayer() {
 		// ok
@@ -14,7 +16,7 @@ public class HumanPlayer extends AbstractTakeGamePlayer {
 	}
 
 	@Override
-	public int doTurn(int stones) {
+	public Integer doTurn(Integer stones) {
 		System.out.println(String.format("Es gibt %s Steine. Bitte nehmen Sie 1,2 oder 3!", stones));
 		return scanner.nextInt();
 		
