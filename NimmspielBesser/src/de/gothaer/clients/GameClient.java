@@ -7,7 +7,6 @@ public class GameClient {
 	private final Game game;
 	
 	public GameClient(Game game) {
-		super();
 		this.game = game;
 	}
 
