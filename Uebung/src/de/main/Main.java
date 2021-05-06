@@ -22,12 +22,20 @@ public class Main {
 
 	private void run() {
 		fillArrayWithRandomNumbers();
+		printMaxValue();
+	}
+
+	private void printMaxValue() {
+		runThreadSequences(this::findAndPrintMaxValueWithTimeAnalyzer);
+
 	}
 
 	private void fillArrayWithRandomNumbers() {
-		for (threadCount = 1; threadCount <= Runtime.getRuntime().availableProcessors() + 1; threadCount++) {
-			fillArrayWithTimeAnalyzer();
-		}
+		runThreadSequences(this::fillArrayWithTimeAnalyzer);
+	}
+
+	private void findAndPrintMaxValueWithTimeAnalyzer() {
+		decorator.processTimeMeasuring(this::findAndPrintMaxParallelWithArrayFillService);
 
 	}
 
@@ -35,9 +43,20 @@ public class Main {
 		decorator.processTimeMeasuring(this::fillArrayWithParallelArrayFillService);
 	}
 
+	private void findAndPrintMaxParallelWithArrayFillService() {
+		System.out.printf("\nArray wird mit %s Threads analysiert...\n", threadCount);
+		int max = arrayFillService.setFeld(feld).setThreadCount(threadCount).findMaxValue();
+		System.out.println("Maxvalue: " + max);
+	}
+
 	private void fillArrayWithParallelArrayFillService() {
 		System.out.printf("\nArray wird mit %s Threads befüllt...\n", threadCount);
 		arrayFillService.setFeld(feld).setThreadCount(threadCount).fillParallel();
 	}
 
+	private void runThreadSequences(Runnable runnable) {
+		for (threadCount = 1; threadCount <= Runtime.getRuntime().availableProcessors() + 1; threadCount++) {
+			runnable.run();
+		}
+	}
 }
